@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RAGE QUIT // a chatroom roguelike</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Rage Quit home"><span class="brand-mark">R</span><span>RAGE QUIT<span class="brand-slash"> //</span></span></a>
+      <div class="run-label"><span class="live-dot"></span> LIVE RUN <span class="run-seed">#<b id="seed">0428</b></span></div>
+      <button class="icon-btn" id="rulesBtn" title="How to play">i<span class="sr-only">How to play</span></button>
+    </header>
+    <main class="game-layout">
+      <aside class="left-rail">
+        <section class="rail-card run-card">
+          <div class="eyebrow">YOUR RUN <span class="tiny-line"></span></div>
+          <div class="run-title">THE<br><em>CHAT</em><br>GOBLIN</div>
+          <div class="run-subtitle">A deckbuilding descent<br>into the reply queue.</div>
+          <div class="floor-block"><span>FLOOR</span><strong id="floorNum">01</strong><span class="floor-of">/ 03</span></div>
+          <div class="floor-track"><i id="floorTrack"></i></div>
+          <div class="route-list" id="routeList">
+            <div class="route-step active"><span class="route-dot">01</span><span>THE LOBBY</span><b>NOW</b></div>
+            <div class="route-step"><span class="route-dot">02</span><span>MOD ZONE</span><b>LOCKED</b></div>
+            <div class="route-step"><span class="route-dot">03</span><span>THE MAIN</span><b>LOCKED</b></div>
+          </div>
+        </section>
+        <section class="rail-card deck-card">
+          <div class="eyebrow">YOUR LOADOUT</div>
+          <div class="deck-stats"><div><strong id="deckCount">10</strong><span>CARDS</span></div><div><strong id="scrapCount">0</strong><span>CLout</span></div></div>
+          <div class="mini-deck" id="miniDeck"></div>
+          <button class="text-action" id="deckBtn">VIEW DECK <span>↗</span></button>
+        </section>
+        <div class="rail-footer"><span class="status-pip"></span> NO REAL DMs. JUST VIBES.<br><span class="muted">A tiny fictional chatroom.</span></div>
+      </aside>
+
+      <section class="battle-area">
+        <div class="battle-head">
+          <div><div class="eyebrow">CURRENT ENCOUNTER <span class="encounter-index" id="encounterIndex">01 / 03</span></div><h1 id="encounterTitle">A VERY NORMAL LOBBY</h1></div>
+          <div class="head-tags"><span class="tag tag-live">● LIVE</span><span class="tag" id="enemyType">RANDOM REGULAR</span></div>
+        </div>
+        <div class="arena">
+          <div class="arena-topline"><span>◉ # general-chat</span><span id="chatTime">11:48 PM</span></div>
+          <div class="opponent" id="opponent">
+            <div class="avatar-wrap"><div class="avatar" id="enemyAvatar">K</div><span class="avatar-status"></span></div>
+            <div class="opponent-info"><div class="opponent-name"><strong id="enemyName">kevin.exe</strong><span class="role-badge" id="enemyRole">MEMBER</span></div><div class="enemy-sub" id="enemySub">has been online for 3 hours</div></div>
+            <div class="intent" id="intent"><span class="intent-icon">↗</span><div><b id="intentValue">8</b><small>COMING UP</small></div></div>
+          </div>
+          <div class="status-bars">
+            <div class="bar-row"><span class="bar-label">TILT <small>THEIR COMPOSURE</small></span><div class="bar-track tilt-track"><div class="bar-fill tilt-fill" id="tiltFill"></div><span class="bar-value" id="tiltValue">0 / 100</span></div><span class="bar-icon">◉</span></div>
+            <div class="bar-row"><span class="bar-label">YOUR FOCUS <small>KEEP IT TOGETHER</small></span><div class="bar-track focus-track"><div class="bar-fill focus-fill" id="focusFill"></div><span class="bar-value" id="focusValue">50 / 50</span></div><span class="bar-icon focus-icon">✳</span></div>
+          </div>
+          <div class="chat-feed" id="chatFeed" aria-live="polite">
+            <div class="chat-line system-line"><span class="chat-stamp">SYSTEM</span><span>kevin.exe joined the channel</span></div>
+            <div class="chat-line enemy-line"><span class="chat-stamp">KEVIN</span><span>anyone know why my mic sounds weird</span></div>
+            <div class="chat-line player-line"><span class="chat-stamp">YOU</span><span>it sounds like a mic to me</span></div>
+          </div>
+          <div class="arena-bottom"><span><i class="pulse"></i> <b id="battleStatus">YOUR TURN</b></span><span>ROOM <b id="roomLabel">01</b> <span class="slash">/</span> 03</span></div>
+        </div>
+
+        <div class="battle-controls">
+          <div class="turn-info"><span class="energy-label">ENERGY</span><div class="energy-pips" id="energyPips"></div><span class="energy-count"><b id="energyValue">3</b><small> / 3</small></span></div>
+          <div class="turn-hint" id="turnHint">Play cards to crank up the tilt.</div>
+          <button class="end-turn" id="endTurnBtn">END TURN <span>↗</span></button>
+        </div>
+        <div class="hand-heading"><span>YOUR HAND <b id="handCount">5</b></span><span class="hand-note">SELECT A CARD TO PLAY</span></div>
+        <div class="hand" id="hand"></div>
+      </section>
+
+      <aside class="right-rail">
+        <div class="rail-card feed-card">
+          <div class="feed-head"><div><div class="eyebrow">THE FEED</div><h2>Live reactions</h2></div><span class="feed-count" id="reactionCount">0</span></div>
+          <div class="reaction-list" id="reactionList"></div>
+          <div class="feed-footer"><span class="pulse"></span> UPDATING IN REAL TIME</div>
+        </div>
+        <div class="rail-card tip-card"><span class="tip-icon">✳</span><div class="eyebrow">GOBLIN WISDOM</div><p id="tipText">A well-timed “huh?” can do more damage than a paragraph.</p><span class="tip-byline">— THE OLD MOD</span></div>
+        <div class="rail-card score-card"><div class="eyebrow">RUN RECORD</div><div class="record-row"><span>ROOMS CLEARED</span><b id="roomsCleared">0</b></div><div class="record-row"><span>PEAK TILT</span><b id="peakTilt">0%</b></div><div class="record-row"><span>CARDS PLAYED</span><b id="cardsPlayed">0</b></div></div>
+      </aside>
+    </main>
+  </div>
+  <div class="modal-backdrop hidden" id="modalBackdrop"><div class="modal" id="modal"><button class="modal-close" id="modalClose">×</button><div id="modalContent"></div></div></div>
+  <script src="game.js"></script>
+</body>
+</html>
